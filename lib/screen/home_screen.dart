@@ -51,6 +51,7 @@ class HomeScreen extends ConsumerWidget with LogMixin {
                             const FeatherIcon(
                               FeatherIcons.play,
                               strokeWidth: 1.5,
+                              color: Colors.white,
                             ),
                             const SizedBox(width: 8),
                             Text(

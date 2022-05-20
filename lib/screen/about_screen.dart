@@ -37,6 +37,7 @@ class AboutScreen extends StatelessWidget {
                 trailing: const FeatherIcon(
                   FeatherIcons.link,
                   strokeWidth: 1.5,
+                  color: Colors.white,
                 ),
                 onTap: () async {
                   final url = Uri.parse('https://github.com/vaetas/inquire');
