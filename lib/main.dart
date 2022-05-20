@@ -2,10 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:inquire/screen/about_screen.dart';
 import 'package:inquire/screen/game_screen.dart';
 import 'package:inquire/screen/home_screen.dart';
 import 'package:inquire/screen/question_list_screen.dart';
 import 'package:inquire/util/locator.dart';
+import 'package:inquire/util/palette.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +46,10 @@ class _InquireAppState extends State<InquireApp> {
             path: 'questions',
             builder: (context, state) => const QuestionListScreen(),
           ),
+          GoRoute(
+            path: 'about',
+            builder: (context, state) => const AboutScreen(),
+          ),
         ],
       ),
     ],
@@ -54,7 +60,12 @@ class _InquireAppState extends State<InquireApp> {
     return MaterialApp.router(
       title: 'Inquire',
       theme: ThemeData(
+        brightness: Brightness.dark,
         primarySwatch: Colors.indigo,
+        scaffoldBackgroundColor: Palette.primaryColor,
+        appBarTheme: const AppBarTheme(
+          color: Colors.black,
+        ),
       ),
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,

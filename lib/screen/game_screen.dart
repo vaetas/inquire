@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:inquire/component/back_button.dart';
 import 'package:inquire/provider/progress_provider.dart';
 import 'package:inquire/provider/question_list_provider.dart';
+import 'package:inquire/util/palette.dart';
 
 class GameScreen extends ConsumerWidget {
   const GameScreen({
@@ -11,7 +12,7 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final backgroundColor = Theme.of(context).primaryColor;
+    const backgroundColor = Palette.primaryColor;
     final padding = MediaQuery.of(context).padding;
 
     final progress = ref.watch(progressProvider);
@@ -27,11 +28,8 @@ class GameScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
-              children: [
-                BackButton(
-                  onPressed: () => context.pop(),
-                  color: Colors.white,
-                ),
+              children: const [
+                CustomBackButton(),
               ],
             ),
             ...progress.when(
@@ -89,25 +87,36 @@ class _NextQuestionButton extends StatelessWidget {
 
     return InkWell(
       onTap: onPressed,
-      child: Container(
-        color: const Color(0xff7280ce).withOpacity(0.8),
-        width: double.infinity,
-        padding: EdgeInsets.only(
-          bottom: padding.bottom + 8,
-          top: 24,
-          left: 16,
-          right: 16,
-        ),
-        child: Center(
-          child: Text(
-            'Next question',
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.9),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
+      focusColor: Colors.white,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            color: Colors.white24,
+            width: double.infinity,
+            height: 1,
+          ),
+          Container(
+            color: Colors.black,
+            width: double.infinity,
+            padding: EdgeInsets.only(
+              bottom: padding.bottom + 8,
+              top: 24,
+              left: 16,
+              right: 16,
+            ),
+            child: Center(
+              child: Text(
+                'Next question'.toUpperCase(),
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.9),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -129,16 +138,18 @@ class _QuestionTextView extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.only(
               top: constraints.minHeight * 0.2,
-              left: 16,
-              right: 16,
+              left: 24,
+              right: 24,
             ),
             child: Text(
               text,
               style: const TextStyle(
                 color: Colors.white,
+                fontFamily: Palette.serifFont,
                 fontSize: 30,
                 fontWeight: FontWeight.w600,
               ),
+              textAlign: TextAlign.center,
             ),
           );
         },

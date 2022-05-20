@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:inquire/component/back_button.dart';
+import 'package:inquire/component/sliver_gap.dart';
 import 'package:inquire/model/question/question.dart';
 import 'package:inquire/provider/question_list_provider.dart';
 
@@ -13,10 +15,24 @@ class QuestionListScreen extends ConsumerWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
-            title: Text('Question list'),
+          SliverAppBar(
+            title: Text(
+              'Question list'.toUpperCase(),
+              style: const TextStyle(fontSize: 16),
+            ),
             pinned: true,
+            elevation: 10,
+            leading: const CustomBackButton(),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(2),
+              child: Container(
+                color: Colors.white24,
+                width: double.infinity,
+                height: 1,
+              ),
+            ),
           ),
+          const SliverGap(24),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
@@ -26,6 +42,7 @@ class QuestionListScreen extends ConsumerWidget {
               childCount: questions.length,
             ),
           ),
+          const SliverGap(64),
         ],
       ),
     );
