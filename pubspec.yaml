@@ -12,6 +12,7 @@ dependencies:
   feather_icons_svg: ^0.2.1
   flutter:
     sdk: flutter
+  flutter_native_splash: ^2.2.0+1
   flutter_riverpod: ^1.0.4
   freezed_annotation: ^2.0.3
   get_it: ^7.2.0
@@ -38,3 +39,8 @@ flutter:
           weight: 700
   assets:
     - assets/questions/
+
+# `flutter pub run flutter_native_splash:create`
+flutter_native_splash:
+  color: "#000000"
+  image: assets/images/splash.png
