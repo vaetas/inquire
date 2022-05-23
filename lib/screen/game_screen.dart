@@ -121,7 +121,7 @@ class _NextQuestionButton extends StatelessWidget {
             color: Colors.black,
             width: double.infinity,
             padding: EdgeInsets.only(
-              bottom: padding.bottom + 8,
+              bottom: padding.bottom + 24,
               top: 24,
               left: 16,
               right: 16,

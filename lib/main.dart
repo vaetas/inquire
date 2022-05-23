@@ -58,6 +58,7 @@ class _InquireAppState extends State<InquireApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Inquire',
       theme: ThemeData(
         brightness: Brightness.dark,
@@ -65,6 +66,7 @@ class _InquireAppState extends State<InquireApp> {
         scaffoldBackgroundColor: Palette.primaryColor,
         appBarTheme: const AppBarTheme(
           color: Colors.black,
+          centerTitle: true,
         ),
       ),
       routerDelegate: router.routerDelegate,

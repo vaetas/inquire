@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:feather_icons_svg/feather_icons_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:inquire/component/back_button.dart';
@@ -73,9 +75,11 @@ class _Footer extends StatelessWidget {
             await launchUrl(url, mode: LaunchMode.externalApplication);
           }
         },
-        child: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text('Made with ❤️by Vojtech Pavlovsky'),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            'Made with ❤️${Platform.isIOS ? '' : ' '}by Vojtech Pavlovsky',
+          ),
         ),
       ),
     );
