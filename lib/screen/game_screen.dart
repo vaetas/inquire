@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:inquire/component/back_button.dart';
@@ -36,7 +37,27 @@ class GameScreen extends ConsumerWidget {
               active: (currentQuestion, finishedQuestions) {
                 final question = ref.watch(questionProvider(currentQuestion));
                 return [
-                  _QuestionTextView(text: question.text),
+                  Expanded(
+                    child: PageTransitionSwitcher(
+                      transitionBuilder: (
+                        child,
+                        primaryAnimation,
+                        secondaryAnimation,
+                      ) {
+                        return SharedAxisTransition(
+                          animation: primaryAnimation,
+                          secondaryAnimation: secondaryAnimation,
+                          transitionType: SharedAxisTransitionType.horizontal,
+                          fillColor: Colors.black,
+                          child: child,
+                        );
+                      },
+                      child: _QuestionTextView(
+                        key: ValueKey(question.text.hashCode),
+                        text: question.text,
+                      ),
+                    ),
+                  ),
                   _NextQuestionButton(
                     onPressed: () {
                       ref.read(progressProvider.notifier).nextQuestion();
@@ -132,28 +153,27 @@ class _QuestionTextView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return Padding(
-            padding: EdgeInsets.only(
-              top: constraints.minHeight * 0.2,
-              left: 24,
-              right: 24,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          height: double.infinity,
+          padding: EdgeInsets.only(
+            top: constraints.maxHeight * 0.2,
+            left: 24,
+            right: 24,
+          ),
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: Palette.serifFont,
+              fontSize: 30,
+              fontWeight: FontWeight.w600,
             ),
-            child: Text(
-              text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontFamily: Palette.serifFont,
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          );
-        },
-      ),
+            textAlign: TextAlign.center,
+          ),
+        );
+      },
     );
   }
 }
