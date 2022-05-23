@@ -2,6 +2,7 @@ import 'package:feather_icons_svg/feather_icons_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:inquire/component/secondary_button.dart';
 import 'package:inquire/model/progress_state/progress_state.dart';
 import 'package:inquire/provider/progress_provider.dart';
 import 'package:inquire/util/log.dart';
@@ -90,7 +91,7 @@ class _ResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _SecondaryButton(
+    return SecondaryButton(
       onPressed: onPressed,
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -120,7 +121,7 @@ class _Footer extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _SecondaryButton(
+        SecondaryButton(
           onPressed: () {
             context.go('/questions');
           },
@@ -129,7 +130,7 @@ class _Footer extends StatelessWidget {
         const SizedBox(width: 8),
         const Text('—'),
         const SizedBox(width: 8),
-        _SecondaryButton(
+        SecondaryButton(
           onPressed: () {
             context.go('/about');
           },
@@ -149,30 +150,6 @@ class _Line extends StatelessWidget {
       color: Colors.white24,
       width: double.infinity,
       height: 1,
-    );
-  }
-}
-
-class _SecondaryButton extends StatelessWidget {
-  const _SecondaryButton({
-    Key? key,
-    required this.child,
-    this.onPressed,
-  }) : super(key: key);
-
-  final Widget child;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(Colors.white),
-        overlayColor: MaterialStateProperty.all(Colors.white10),
-        minimumSize: MaterialStateProperty.all(const Size(50, 40)),
-      ),
-      child: child,
     );
   }
 }
