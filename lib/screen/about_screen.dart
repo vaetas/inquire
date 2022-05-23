@@ -1,6 +1,7 @@
 import 'package:feather_icons_svg/feather_icons_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:inquire/component/back_button.dart';
+import 'package:pressable/pressable.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -63,11 +64,19 @@ class _Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Align(
+    return Align(
       alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Text('Made with ❤️ by Vojtech Pavlovsky'),
+      child: Pressable.opacity(
+        onPressed: () async {
+          final url = Uri.parse('https://www.vojtech.net/');
+          if (await canLaunchUrl(url)) {
+            await launchUrl(url, mode: LaunchMode.externalApplication);
+          }
+        },
+        child: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text('Made with ❤️by Vojtech Pavlovsky'),
+        ),
       ),
     );
   }
