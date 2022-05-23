@@ -42,7 +42,7 @@ class AboutScreen extends StatelessWidget {
                 onTap: () async {
                   final url = Uri.parse('https://github.com/vaetas/inquire');
                   if (await canLaunchUrl(url)) {
-                    await launchUrl(url);
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
                   }
                 },
               ),
