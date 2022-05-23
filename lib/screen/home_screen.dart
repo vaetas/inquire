@@ -28,78 +28,114 @@ class HomeScreen extends ConsumerWidget with LogMixin {
         child: Column(
           children: [
             Expanded(
-              child: Center(
-                child: InkWell(
-                  onTap: () {
-                    if (progressState is ProgressStateActive) {
-                      log('Resuming previous game...');
-                    } else {
-                      ref.read(progressProvider.notifier).start();
-                    }
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      if (progressState is ProgressStateActive) {
+                        log('Resuming previous game...');
+                      } else {
+                        ref.read(progressProvider.notifier).start();
+                      }
 
-                    context.go('/game');
-                  },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const _Line(),
-                      Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const FeatherIcon(
-                              FeatherIcons.play,
-                              strokeWidth: 1.5,
-                              color: Colors.white,
+                      context.go('/game');
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const _Line(),
+                        Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Text(
+                            progressState is ProgressStateActive
+                                ? 'Continue'.toUpperCase()
+                                : 'Play'.toUpperCase(),
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w600,
                             ),
-                            const SizedBox(width: 8),
-                            Text(
-                              progressState is ProgressStateActive
-                                  ? 'Continue'.toUpperCase()
-                                  : 'Play'.toUpperCase(),
-                              style: const TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            const SizedBox(
-                              width: 30,
-                              height: 30,
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                      const _Line(),
-                    ],
+                        const _Line(),
+                      ],
+                    ),
                   ),
-                ),
+                  if (progressState is ProgressStateActive)
+                    _ResetButton(
+                      onPressed: () {
+                        ref.read(progressProvider.notifier).reset();
+                      },
+                    )
+                  else
+                    const SizedBox(height: 48),
+                ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _SecondaryButton(
-                  onPressed: () {
-                    context.go('/questions');
-                  },
-                  child: Text('Question list'.toUpperCase()),
-                ),
-                const SizedBox(width: 8),
-                const Text('—'),
-                const SizedBox(width: 8),
-                _SecondaryButton(
-                  onPressed: () {
-                    context.go('/about');
-                  },
-                  child: Text('About'.toUpperCase()),
-                ),
-              ],
-            ),
+            const _Footer(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ResetButton extends StatelessWidget {
+  const _ResetButton({
+    Key? key,
+    this.onPressed,
+  }) : super(key: key);
+
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return _SecondaryButton(
+      onPressed: onPressed,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const FeatherIcon(
+            FeatherIcons.repeat,
+            size: 16,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            'New game'.toUpperCase(),
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Footer extends StatelessWidget {
+  const _Footer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _SecondaryButton(
+          onPressed: () {
+            context.go('/questions');
+          },
+          child: Text('Question list'.toUpperCase()),
+        ),
+        const SizedBox(width: 8),
+        const Text('—'),
+        const SizedBox(width: 8),
+        _SecondaryButton(
+          onPressed: () {
+            context.go('/about');
+          },
+          child: Text('About'.toUpperCase()),
+        ),
+      ],
     );
   }
 }
@@ -134,6 +170,7 @@ class _SecondaryButton extends StatelessWidget {
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all(Colors.white),
         overlayColor: MaterialStateProperty.all(Colors.white10),
+        minimumSize: MaterialStateProperty.all(const Size(50, 40)),
       ),
       child: child,
     );
