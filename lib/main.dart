@@ -2,12 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:inquire/screen/about_screen.dart';
-import 'package:inquire/screen/game_screen.dart';
-import 'package:inquire/screen/home_screen.dart';
-import 'package:inquire/screen/question_list_screen.dart';
-import 'package:inquire/util/locator.dart';
-import 'package:inquire/util/palette.dart';
+
+import '/screen/about_screen.dart';
+import '/screen/game_screen.dart';
+import '/screen/home_screen.dart';
+import '/screen/question_list_screen.dart';
+import '/util/locator.dart';
+import '/util/palette.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

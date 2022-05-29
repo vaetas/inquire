@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
-import 'package:inquire/model/question/question.dart';
+
+import '/model/question/question.dart';
 
 class QuestionRepository {
   QuestionRepository();

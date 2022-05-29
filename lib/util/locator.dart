@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:inquire/repository/question_repository.dart';
+
+import '/repository/question_repository.dart';
 
 final locator = GetIt.instance;
 

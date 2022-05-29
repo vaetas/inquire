@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:inquire/component/back_button.dart';
-import 'package:inquire/component/sliver_gap.dart';
-import 'package:inquire/model/question/question.dart';
-import 'package:inquire/provider/question_list_provider.dart';
+
+import '/component/back_button.dart';
+import '/component/sliver_gap.dart';
+import '/model/question/question.dart';
+import '/provider/question_list_provider.dart';
 
 class QuestionListScreen extends ConsumerWidget {
   const QuestionListScreen({Key? key}) : super(key: key);

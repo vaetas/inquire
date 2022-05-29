@@ -2,9 +2,10 @@ import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:inquire/model/progress_state/progress_state.dart';
-import 'package:inquire/provider/question_list_provider.dart';
-import 'package:inquire/util/log.dart';
+
+import '/model/progress_state/progress_state.dart';
+import '/provider/question_list_provider.dart';
+import '/util/log.dart';
 
 class ProgressNotifier extends StateNotifier<ProgressState> with LogMixin {
   ProgressNotifier(

@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:feather_icons_svg/feather_icons_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:inquire/component/back_button.dart';
 import 'package:pressable/pressable.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '/component/back_button.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);

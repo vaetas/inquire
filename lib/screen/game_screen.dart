@@ -1,10 +1,11 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:inquire/component/back_button.dart';
-import 'package:inquire/provider/progress_provider.dart';
-import 'package:inquire/provider/question_list_provider.dart';
-import 'package:inquire/util/palette.dart';
+
+import '/component/back_button.dart';
+import '/provider/progress_provider.dart';
+import '/provider/question_list_provider.dart';
+import '/util/palette.dart';
 
 class GameScreen extends ConsumerWidget {
   const GameScreen({

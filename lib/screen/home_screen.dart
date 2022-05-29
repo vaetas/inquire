@@ -2,11 +2,12 @@ import 'package:feather_icons_svg/feather_icons_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:inquire/component/secondary_button.dart';
-import 'package:inquire/model/progress_state/progress_state.dart';
-import 'package:inquire/provider/progress_provider.dart';
-import 'package:inquire/util/log.dart';
-import 'package:inquire/util/palette.dart';
+
+import '/component/secondary_button.dart';
+import '/model/progress_state/progress_state.dart';
+import '/provider/progress_provider.dart';
+import '/util/log.dart';
+import '/util/palette.dart';
 
 class HomeScreen extends ConsumerWidget with LogMixin {
   const HomeScreen({Key? key}) : super(key: key);

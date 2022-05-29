@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:inquire/model/question/question.dart';
-import 'package:inquire/repository/question_repository.dart';
-import 'package:inquire/util/locator.dart';
+
+import '/model/question/question.dart';
+import '/repository/question_repository.dart';
+import '/util/locator.dart';
 
 class QuestionListNotifier extends StateNotifier<List<Question>> {
   QuestionListNotifier({
