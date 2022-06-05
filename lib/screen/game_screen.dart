@@ -1,19 +1,42 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:inquire/util/log.dart';
 
 import '/component/back_button.dart';
+import '/model/progress_state/progress_state.dart';
 import '/provider/progress_provider.dart';
 import '/provider/question_list_provider.dart';
 import '/util/palette.dart';
 
-class GameScreen extends ConsumerWidget {
-  const GameScreen({
-    Key? key,
-  }) : super(key: key);
+class GameScreen extends ConsumerStatefulWidget {
+  const GameScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<GameScreen> createState() => _GameScreenState();
+}
+
+class _GameScreenState extends ConsumerState<GameScreen> with LogMixin {
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _initGame();
+    });
+  }
+
+  void _initGame() {
+    final state = ref.read(progressProvider);
+    if (state is ProgressStateActive) {
+      log('Resuming previous game...');
+    } else {
+      ref.read(progressProvider.notifier).start();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     const backgroundColor = Palette.primaryColor;
     final padding = MediaQuery.of(context).padding;
 
@@ -29,11 +52,7 @@ class GameScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              children: const [
-                CustomBackButton(),
-              ],
-            ),
+            Row(children: const [CustomBackButton()]),
             ...progress.when(
               active: (currentQuestion, finishedQuestions) {
                 final question = ref.watch(questionProvider(currentQuestion));
@@ -84,7 +103,7 @@ class GameScreen extends ConsumerWidget {
                 ];
               },
               inactive: () {
-                throw StateError('Invalid state');
+                return const [SizedBox()];
               },
             ),
           ],

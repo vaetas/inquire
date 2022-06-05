@@ -29,7 +29,7 @@ class ProgressNotifier extends StateNotifier<ProgressState> with LogMixin {
     return availableQuestions.elementAt(nextIndex).id;
   }
 
-  void start() {
+  Future<void> start() async {
     log('start');
 
     state = ProgressState.active(
@@ -38,7 +38,7 @@ class ProgressNotifier extends StateNotifier<ProgressState> with LogMixin {
     );
   }
 
-  void nextQuestion() {
+  Future<void> nextQuestion() async {
     log('nextQuestion');
 
     state.when(
@@ -64,7 +64,7 @@ class ProgressNotifier extends StateNotifier<ProgressState> with LogMixin {
     );
   }
 
-  void reset() {
+  Future<void> reset() async {
     log('reset');
     state = const ProgressState.inactive();
   }

@@ -35,11 +35,11 @@ class HomeScreen extends ConsumerWidget with LogMixin {
                 children: [
                   InkWell(
                     onTap: () {
-                      if (progressState is ProgressStateActive) {
-                        log('Resuming previous game...');
-                      } else {
-                        ref.read(progressProvider.notifier).start();
-                      }
+                      // if (progressState is ProgressStateActive) {
+                      //   log('Resuming previous game...');
+                      // } else {
+                      //   ref.read(progressProvider.notifier).start();
+                      // }
 
                       context.go('/game');
                     },
