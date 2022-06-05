@@ -2,7 +2,7 @@ name: inquire
 description: Get to truly know yourself & other people.
 publish_to: 'none'
 
-version: 1.1.0+4
+version: 1.2.0+5
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
