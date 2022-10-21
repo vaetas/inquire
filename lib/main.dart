@@ -72,6 +72,7 @@ class _InquireAppState extends State<InquireApp> {
       ),
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider,
     );
   }
 }

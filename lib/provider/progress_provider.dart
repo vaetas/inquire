@@ -8,13 +8,11 @@ import '/provider/question_list_provider.dart';
 import '/util/log.dart';
 
 class ProgressNotifier extends StateNotifier<ProgressState> with LogMixin {
-  ProgressNotifier(
-    this.read,
-  ) : super(const ProgressState.inactive());
+  ProgressNotifier(this.ref) : super(const ProgressState.inactive());
 
-  final Reader read;
+  final Ref ref;
 
-  late final _questions = read(questionListProvider);
+  late final _questions = ref.read(questionListProvider);
   late final _random = math.Random();
 
   int? _generateNextIndex({
@@ -77,5 +75,5 @@ class ProgressNotifier extends StateNotifier<ProgressState> with LogMixin {
 }
 
 final progressProvider = StateNotifierProvider<ProgressNotifier, ProgressState>(
-  (ref) => ProgressNotifier(ref.read),
+  ProgressNotifier.new,
 );

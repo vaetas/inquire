@@ -32,33 +32,37 @@ mixin _$Question {
 /// @nodoc
 abstract class $QuestionCopyWith<$Res> {
   factory $QuestionCopyWith(Question value, $Res Function(Question) then) =
-      _$QuestionCopyWithImpl<$Res>;
+      _$QuestionCopyWithImpl<$Res, Question>;
+  @useResult
   $Res call({int id, String text});
 }
 
 /// @nodoc
-class _$QuestionCopyWithImpl<$Res> implements $QuestionCopyWith<$Res> {
+class _$QuestionCopyWithImpl<$Res, $Val extends Question>
+    implements $QuestionCopyWith<$Res> {
   _$QuestionCopyWithImpl(this._value, this._then);
 
-  final Question _value;
   // ignore: unused_field
-  final $Res Function(Question) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? text = freezed,
+    Object? id = null,
+    Object? text = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -68,30 +72,30 @@ abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
           _$_Question value, $Res Function(_$_Question) then) =
       __$$_QuestionCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int id, String text});
 }
 
 /// @nodoc
-class __$$_QuestionCopyWithImpl<$Res> extends _$QuestionCopyWithImpl<$Res>
+class __$$_QuestionCopyWithImpl<$Res>
+    extends _$QuestionCopyWithImpl<$Res, _$_Question>
     implements _$$_QuestionCopyWith<$Res> {
   __$$_QuestionCopyWithImpl(
       _$_Question _value, $Res Function(_$_Question) _then)
-      : super(_value, (v) => _then(v as _$_Question));
+      : super(_value, _then);
 
-  @override
-  _$_Question get _value => super._value as _$_Question;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? text = freezed,
+    Object? id = null,
+    Object? text = null,
   }) {
     return _then(_$_Question(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
@@ -122,25 +126,25 @@ class _$_Question implements _Question {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Question &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.text, text));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(text));
+  int get hashCode => Object.hash(runtimeType, id, text);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_QuestionCopyWith<_$_Question> get copyWith =>
       __$$_QuestionCopyWithImpl<_$_Question>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_QuestionToJson(this);
+    return _$$_QuestionToJson(
+      this,
+    );
   }
 }
 
@@ -151,9 +155,9 @@ abstract class _Question implements Question {
   factory _Question.fromJson(Map<String, dynamic> json) = _$_Question.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get text => throw _privateConstructorUsedError;
+  String get text;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionCopyWith<_$_Question> get copyWith =>
