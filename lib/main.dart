@@ -10,9 +10,9 @@ import '/screen/question_list_screen.dart';
 import '/util/locator.dart';
 import '/util/palette.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  _startApp();
+  await _startApp();
 }
 
 Future<void> _startApp() async {

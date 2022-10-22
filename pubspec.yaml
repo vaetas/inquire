@@ -10,6 +10,7 @@ environment:
 dependencies:
   animations: ^2.0.7
   collection: ^1.16.0
+  csv: ^5.0.1
   feather_icons_svg: 0.4.0
   flutter:
     sdk: flutter
@@ -40,7 +41,7 @@ flutter:
         - asset: assets/fonts/SourceSerif4-Bold.ttf
           weight: 700
   assets:
-    - assets/questions/
+    - assets/
 
 # `flutter pub run flutter_native_splash:create`
 flutter_native_splash:
