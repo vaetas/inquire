@@ -7,7 +7,6 @@ import 'package:inquire/util/log.dart';
 import '/component/back_button.dart';
 import '/model/progress_state/progress_state.dart';
 import '/provider/progress_provider.dart';
-import '/provider/question_list_provider.dart';
 import '/util/palette.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
@@ -55,9 +54,9 @@ class _GameScreenState extends ConsumerState<GameScreen> with LogMixin {
             Row(children: const [CustomBackButton()]),
             ...progress.when(
               active: (currentQuestion, finishedQuestions) {
-                final question = ref.watch(questionProvider(currentQuestion));
                 return [
                   Expanded(
+                    key: const ValueKey('question_view'),
                     child: PageTransitionSwitcher(
                       transitionBuilder: (
                         child,
@@ -73,12 +72,12 @@ class _GameScreenState extends ConsumerState<GameScreen> with LogMixin {
                         );
                       },
                       child: _QuestionTextView(
-                        key: ValueKey(question.text.hashCode),
-                        text: question.text,
+                        key: ValueKey(currentQuestion.text.hashCode),
+                        text: currentQuestion.text,
                       ),
                     ),
                   ),
-                  _NextQuestionButton(
+                  NextQuestionButton(
                     onPressed: () {
                       ref.read(progressProvider.notifier).nextQuestion();
                     },
@@ -114,8 +113,8 @@ class _GameScreenState extends ConsumerState<GameScreen> with LogMixin {
   }
 }
 
-class _NextQuestionButton extends StatelessWidget {
-  const _NextQuestionButton({
+class NextQuestionButton extends StatelessWidget {
+  const NextQuestionButton({
     Key? key,
     required this.onPressed,
   }) : super(key: key);

@@ -19,22 +19,27 @@ mixin _$ProgressState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inactive,
-    required TResult Function(int currentQuestion, List<int> finishedQuestions)
+    required TResult Function(
+            Question currentQuestion, List<Question> remainingQuestions)
         active,
     required TResult Function() finished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? inactive,
-    TResult Function(int currentQuestion, List<int> finishedQuestions)? active,
-    TResult Function()? finished,
+    TResult? Function()? inactive,
+    TResult? Function(
+            Question currentQuestion, List<Question> remainingQuestions)?
+        active,
+    TResult? Function()? finished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inactive,
-    TResult Function(int currentQuestion, List<int> finishedQuestions)? active,
+    TResult Function(
+            Question currentQuestion, List<Question> remainingQuestions)?
+        active,
     TResult Function()? finished,
     required TResult orElse(),
   }) =>
@@ -48,9 +53,9 @@ mixin _$ProgressState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressStateInactive value)? inactive,
-    TResult Function(ProgressStateActive value)? active,
-    TResult Function(ProgressStateFinished value)? finished,
+    TResult? Function(ProgressStateInactive value)? inactive,
+    TResult? Function(ProgressStateActive value)? active,
+    TResult? Function(ProgressStateFinished value)? finished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,17 +72,18 @@ mixin _$ProgressState {
 abstract class $ProgressStateCopyWith<$Res> {
   factory $ProgressStateCopyWith(
           ProgressState value, $Res Function(ProgressState) then) =
-      _$ProgressStateCopyWithImpl<$Res>;
+      _$ProgressStateCopyWithImpl<$Res, ProgressState>;
 }
 
 /// @nodoc
-class _$ProgressStateCopyWithImpl<$Res>
+class _$ProgressStateCopyWithImpl<$Res, $Val extends ProgressState>
     implements $ProgressStateCopyWith<$Res> {
   _$ProgressStateCopyWithImpl(this._value, this._then);
 
-  final ProgressState _value;
   // ignore: unused_field
-  final $Res Function(ProgressState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -89,14 +95,11 @@ abstract class _$$ProgressStateInactiveCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressStateInactiveCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressStateInactive>
     implements _$$ProgressStateInactiveCopyWith<$Res> {
   __$$ProgressStateInactiveCopyWithImpl(_$ProgressStateInactive _value,
       $Res Function(_$ProgressStateInactive) _then)
-      : super(_value, (v) => _then(v as _$ProgressStateInactive));
-
-  @override
-  _$ProgressStateInactive get _value => super._value as _$ProgressStateInactive;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -122,7 +125,8 @@ class _$ProgressStateInactive implements ProgressStateInactive {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inactive,
-    required TResult Function(int currentQuestion, List<int> finishedQuestions)
+    required TResult Function(
+            Question currentQuestion, List<Question> remainingQuestions)
         active,
     required TResult Function() finished,
   }) {
@@ -132,9 +136,11 @@ class _$ProgressStateInactive implements ProgressStateInactive {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? inactive,
-    TResult Function(int currentQuestion, List<int> finishedQuestions)? active,
-    TResult Function()? finished,
+    TResult? Function()? inactive,
+    TResult? Function(
+            Question currentQuestion, List<Question> remainingQuestions)?
+        active,
+    TResult? Function()? finished,
   }) {
     return inactive?.call();
   }
@@ -143,7 +149,9 @@ class _$ProgressStateInactive implements ProgressStateInactive {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inactive,
-    TResult Function(int currentQuestion, List<int> finishedQuestions)? active,
+    TResult Function(
+            Question currentQuestion, List<Question> remainingQuestions)?
+        active,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -166,9 +174,9 @@ class _$ProgressStateInactive implements ProgressStateInactive {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressStateInactive value)? inactive,
-    TResult Function(ProgressStateActive value)? active,
-    TResult Function(ProgressStateFinished value)? finished,
+    TResult? Function(ProgressStateInactive value)? inactive,
+    TResult? Function(ProgressStateActive value)? active,
+    TResult? Function(ProgressStateFinished value)? finished,
   }) {
     return inactive?.call(this);
   }
@@ -197,35 +205,44 @@ abstract class _$$ProgressStateActiveCopyWith<$Res> {
   factory _$$ProgressStateActiveCopyWith(_$ProgressStateActive value,
           $Res Function(_$ProgressStateActive) then) =
       __$$ProgressStateActiveCopyWithImpl<$Res>;
-  $Res call({int currentQuestion, List<int> finishedQuestions});
+  @useResult
+  $Res call({Question currentQuestion, List<Question> remainingQuestions});
+
+  $QuestionCopyWith<$Res> get currentQuestion;
 }
 
 /// @nodoc
 class __$$ProgressStateActiveCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressStateActive>
     implements _$$ProgressStateActiveCopyWith<$Res> {
   __$$ProgressStateActiveCopyWithImpl(
       _$ProgressStateActive _value, $Res Function(_$ProgressStateActive) _then)
-      : super(_value, (v) => _then(v as _$ProgressStateActive));
+      : super(_value, _then);
 
-  @override
-  _$ProgressStateActive get _value => super._value as _$ProgressStateActive;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentQuestion = freezed,
-    Object? finishedQuestions = freezed,
+    Object? currentQuestion = null,
+    Object? remainingQuestions = null,
   }) {
     return _then(_$ProgressStateActive(
-      currentQuestion: currentQuestion == freezed
+      currentQuestion: null == currentQuestion
           ? _value.currentQuestion
           : currentQuestion // ignore: cast_nullable_to_non_nullable
-              as int,
-      finishedQuestions: finishedQuestions == freezed
-          ? _value._finishedQuestions
-          : finishedQuestions // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as Question,
+      remainingQuestions: null == remainingQuestions
+          ? _value._remainingQuestions
+          : remainingQuestions // ignore: cast_nullable_to_non_nullable
+              as List<Question>,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuestionCopyWith<$Res> get currentQuestion {
+    return $QuestionCopyWith<$Res>(_value.currentQuestion, (value) {
+      return _then(_value.copyWith(currentQuestion: value));
+    });
   }
 }
 
@@ -234,21 +251,21 @@ class __$$ProgressStateActiveCopyWithImpl<$Res>
 class _$ProgressStateActive implements ProgressStateActive {
   const _$ProgressStateActive(
       {required this.currentQuestion,
-      required final List<int> finishedQuestions})
-      : _finishedQuestions = finishedQuestions;
+      required final List<Question> remainingQuestions})
+      : _remainingQuestions = remainingQuestions;
 
   @override
-  final int currentQuestion;
-  final List<int> _finishedQuestions;
+  final Question currentQuestion;
+  final List<Question> _remainingQuestions;
   @override
-  List<int> get finishedQuestions {
+  List<Question> get remainingQuestions {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_finishedQuestions);
+    return EqualUnmodifiableListView(_remainingQuestions);
   }
 
   @override
   String toString() {
-    return 'ProgressState.active(currentQuestion: $currentQuestion, finishedQuestions: $finishedQuestions)';
+    return 'ProgressState.active(currentQuestion: $currentQuestion, remainingQuestions: $remainingQuestions)';
   }
 
   @override
@@ -256,20 +273,19 @@ class _$ProgressStateActive implements ProgressStateActive {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProgressStateActive &&
+            (identical(other.currentQuestion, currentQuestion) ||
+                other.currentQuestion == currentQuestion) &&
             const DeepCollectionEquality()
-                .equals(other.currentQuestion, currentQuestion) &&
-            const DeepCollectionEquality()
-                .equals(other._finishedQuestions, _finishedQuestions));
+                .equals(other._remainingQuestions, _remainingQuestions));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(currentQuestion),
-      const DeepCollectionEquality().hash(_finishedQuestions));
+  int get hashCode => Object.hash(runtimeType, currentQuestion,
+      const DeepCollectionEquality().hash(_remainingQuestions));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProgressStateActiveCopyWith<_$ProgressStateActive> get copyWith =>
       __$$ProgressStateActiveCopyWithImpl<_$ProgressStateActive>(
           this, _$identity);
@@ -278,33 +294,38 @@ class _$ProgressStateActive implements ProgressStateActive {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inactive,
-    required TResult Function(int currentQuestion, List<int> finishedQuestions)
+    required TResult Function(
+            Question currentQuestion, List<Question> remainingQuestions)
         active,
     required TResult Function() finished,
   }) {
-    return active(currentQuestion, finishedQuestions);
+    return active(currentQuestion, remainingQuestions);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? inactive,
-    TResult Function(int currentQuestion, List<int> finishedQuestions)? active,
-    TResult Function()? finished,
+    TResult? Function()? inactive,
+    TResult? Function(
+            Question currentQuestion, List<Question> remainingQuestions)?
+        active,
+    TResult? Function()? finished,
   }) {
-    return active?.call(currentQuestion, finishedQuestions);
+    return active?.call(currentQuestion, remainingQuestions);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inactive,
-    TResult Function(int currentQuestion, List<int> finishedQuestions)? active,
+    TResult Function(
+            Question currentQuestion, List<Question> remainingQuestions)?
+        active,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
     if (active != null) {
-      return active(currentQuestion, finishedQuestions);
+      return active(currentQuestion, remainingQuestions);
     }
     return orElse();
   }
@@ -322,9 +343,9 @@ class _$ProgressStateActive implements ProgressStateActive {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressStateInactive value)? inactive,
-    TResult Function(ProgressStateActive value)? active,
-    TResult Function(ProgressStateFinished value)? finished,
+    TResult? Function(ProgressStateInactive value)? inactive,
+    TResult? Function(ProgressStateActive value)? active,
+    TResult? Function(ProgressStateFinished value)? finished,
   }) {
     return active?.call(this);
   }
@@ -346,11 +367,12 @@ class _$ProgressStateActive implements ProgressStateActive {
 
 abstract class ProgressStateActive implements ProgressState {
   const factory ProgressStateActive(
-      {required final int currentQuestion,
-      required final List<int> finishedQuestions}) = _$ProgressStateActive;
+          {required final Question currentQuestion,
+          required final List<Question> remainingQuestions}) =
+      _$ProgressStateActive;
 
-  int get currentQuestion => throw _privateConstructorUsedError;
-  List<int> get finishedQuestions => throw _privateConstructorUsedError;
+  Question get currentQuestion;
+  List<Question> get remainingQuestions;
   @JsonKey(ignore: true)
   _$$ProgressStateActiveCopyWith<_$ProgressStateActive> get copyWith =>
       throw _privateConstructorUsedError;
@@ -365,14 +387,11 @@ abstract class _$$ProgressStateFinishedCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressStateFinishedCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressStateFinished>
     implements _$$ProgressStateFinishedCopyWith<$Res> {
   __$$ProgressStateFinishedCopyWithImpl(_$ProgressStateFinished _value,
       $Res Function(_$ProgressStateFinished) _then)
-      : super(_value, (v) => _then(v as _$ProgressStateFinished));
-
-  @override
-  _$ProgressStateFinished get _value => super._value as _$ProgressStateFinished;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -398,7 +417,8 @@ class _$ProgressStateFinished implements ProgressStateFinished {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inactive,
-    required TResult Function(int currentQuestion, List<int> finishedQuestions)
+    required TResult Function(
+            Question currentQuestion, List<Question> remainingQuestions)
         active,
     required TResult Function() finished,
   }) {
@@ -408,9 +428,11 @@ class _$ProgressStateFinished implements ProgressStateFinished {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? inactive,
-    TResult Function(int currentQuestion, List<int> finishedQuestions)? active,
-    TResult Function()? finished,
+    TResult? Function()? inactive,
+    TResult? Function(
+            Question currentQuestion, List<Question> remainingQuestions)?
+        active,
+    TResult? Function()? finished,
   }) {
     return finished?.call();
   }
@@ -419,7 +441,9 @@ class _$ProgressStateFinished implements ProgressStateFinished {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inactive,
-    TResult Function(int currentQuestion, List<int> finishedQuestions)? active,
+    TResult Function(
+            Question currentQuestion, List<Question> remainingQuestions)?
+        active,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -442,9 +466,9 @@ class _$ProgressStateFinished implements ProgressStateFinished {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressStateInactive value)? inactive,
-    TResult Function(ProgressStateActive value)? active,
-    TResult Function(ProgressStateFinished value)? finished,
+    TResult? Function(ProgressStateInactive value)? inactive,
+    TResult? Function(ProgressStateActive value)? active,
+    TResult? Function(ProgressStateFinished value)? finished,
   }) {
     return finished?.call(this);
   }

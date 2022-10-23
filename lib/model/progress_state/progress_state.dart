@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:inquire/model/question/question.dart';
 
 part 'progress_state.freezed.dart';
 
@@ -7,8 +8,8 @@ class ProgressState with _$ProgressState {
   const factory ProgressState.inactive() = ProgressStateInactive;
 
   const factory ProgressState.active({
-    required int currentQuestion,
-    required List<int> finishedQuestions,
+    required Question currentQuestion,
+    required List<Question> remainingQuestions,
   }) = ProgressStateActive;
 
   const factory ProgressState.finished() = ProgressStateFinished;

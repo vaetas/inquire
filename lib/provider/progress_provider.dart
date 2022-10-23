@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:inquire/model/question/question.dart';
 
 import '/model/progress_state/progress_state.dart';
 import '/provider/question_list_provider.dart';
@@ -15,24 +16,19 @@ class ProgressNotifier extends StateNotifier<ProgressState> with LogMixin {
   late final _questions = ref.read(questionListProvider);
   late final _random = math.Random();
 
-  int? _generateNextIndex({
-    required List<int> finishedQuestions,
+  Question _getRandomQuestion({
+    required List<Question> questions,
   }) {
-    final availableQuestions = _questions.whereNotIndexed(
-      (i, _) => finishedQuestions.contains(i),
-    );
-    if (availableQuestions.isEmpty) return null;
-
-    final nextIndex = _random.nextInt(availableQuestions.length);
-    return availableQuestions.elementAt(nextIndex).id;
+    final nextIndex = _random.nextInt(questions.length);
+    return questions[nextIndex];
   }
 
   Future<void> start() async {
     log('start');
 
     state = ProgressState.active(
-      currentQuestion: _generateNextIndex(finishedQuestions: const [])!,
-      finishedQuestions: const [],
+      currentQuestion: _getRandomQuestion(questions: _questions),
+      remainingQuestions: _questions,
     );
   }
 
@@ -43,16 +39,18 @@ class ProgressNotifier extends StateNotifier<ProgressState> with LogMixin {
       finished: () {
         throw StateError('Game is already finished');
       },
-      active: (currentQuestion, finishedQuestions) {
-        final nextIndex = _generateNextIndex(
-          finishedQuestions: finishedQuestions,
-        );
-        if (nextIndex == null) {
+      active: (currentQuestion, remainingQuestions) {
+        if (remainingQuestions.isEmpty) {
           state = const ProgressState.finished();
         } else {
+          final question = _getRandomQuestion(
+            questions: remainingQuestions,
+          );
           state = ProgressState.active(
-            currentQuestion: nextIndex,
-            finishedQuestions: [...finishedQuestions, nextIndex],
+            currentQuestion: question,
+            remainingQuestions: remainingQuestions
+                .whereNot((element) => element.id == question.id)
+                .toList(),
           );
         }
       },

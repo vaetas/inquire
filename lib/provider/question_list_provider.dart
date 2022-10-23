@@ -22,8 +22,3 @@ final questionListProvider =
     questionRepository: locator<QuestionRepository>(),
   )..load(),
 );
-
-final questionProvider = Provider.family<Question, int>((ref, index) {
-  final questions = ref.watch(questionListProvider);
-  return questions[index];
-});
